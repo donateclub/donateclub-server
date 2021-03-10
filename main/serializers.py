@@ -6,12 +6,12 @@ class NgoSerializer(serializers.ModelSerializer):
         model = Ngo
         fields = ('pk','title', 'description')
 
-class CategorySerializer(serializers.ModelSerializer):
+class IssueSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
+        model = Issue
         fields = ('pk','name',)
     
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('pk','ngo', 'category')
+        fields = ('pk','ngo', 'issue')

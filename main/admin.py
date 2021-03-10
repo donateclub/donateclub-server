@@ -3,15 +3,15 @@ from .models import *
 
 class ProductInline(admin.TabularInline):
     model = Product
-    fields = ['title', 'ngo', 'category']
+    fields = ['title', 'ngo', 'issue']
     show_change_link = True
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'ngo', 'category']
+    list_display = ['title', 'ngo', 'issue']
 
-@admin.register(Category)
-class CatAdmin(admin.ModelAdmin):
+@admin.register(Issue)
+class IssueAdmin(admin.ModelAdmin):
     inlines = [ProductInline]
     list_display = ['name']
 
