@@ -54,5 +54,26 @@ class BlogPost(models.Model):
     ngo = models.ForeignKey(Ngo, on_delete=models.CASCADE)
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
 
-# class ClubUser(AbstractUser):
-#     pass
+class ClubUser(AbstractUser):
+    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    email = models.EmailField(max_length=254)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
+    country = models.CharField(max_length=64)
+    state = models.CharField(max_length=64)
+    city = models.CharField(max_length=64)
+
+class Donation(models.Model):
+    date = models.DateTimeField()
+    amount = models.IntegerField()
+    user = models.ForeignKey(ClubUser, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+class Badge(models.Model):
+    title = models.CharField(max_length=64)
+    description = models.TextField(verbose_name="Description")
+    threshold = models.IntegerField()
+
+class UserBadge(models.Model):
+    user = models.ForeignKey(ClubUser, on_delete=models.CASCADE)
+    badge = models.ForeignKey(Badge, on_delete=models.CASCADE)
