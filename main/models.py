@@ -35,7 +35,17 @@ class Ngo(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+class ClubUser(AbstractUser):
+    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    email = models.EmailField(max_length=254)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
+    country = models.CharField(max_length=64)
+    state = models.CharField(max_length=64)
+    city = models.CharField(max_length=64)
+
 class Product(models.Model):
+    owner = models.ForeignKey(ClubUser, related_name='products', on_delete=models.CASCADE)
     title = models.CharField(verbose_name="Title" , max_length=64)
     description = models.TextField(verbose_name="Description")
     deadline = models.DateTimeField()
@@ -47,6 +57,11 @@ class Product(models.Model):
     
     def __str__(self):
         return f"{self.title}"
+    
+    def save(self, *args, **kwargs):
+
+        super(Product, self).save(*args, **kwargs)
+
 class Service(models.Model):
     title = models.CharField(verbose_name="Title" , max_length=64)
     description = models.TextField(verbose_name="Description")
@@ -72,14 +87,6 @@ class BlogPost(models.Model):
     def __str__(self):
         return f"{self.title}"
 
-class ClubUser(AbstractUser):
-    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
-    email = models.EmailField(max_length=254)
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
-    country = models.CharField(max_length=64)
-    state = models.CharField(max_length=64)
-    city = models.CharField(max_length=64)
 
 class Donation(models.Model):
     date = models.DateTimeField()

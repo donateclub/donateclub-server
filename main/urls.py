@@ -13,7 +13,12 @@ urlpatterns = [
     path('badges/', BadgesList.as_view(), name='badge_collection'),
     path('services/', ServicesList.as_view, name='service_collection'),
     path('users/', ClubUsersList.as_view(), name='user_collection'),
+    path('users/<int:pk>/', ClubUserDetail.as_view(), name='user_details')
 ]
 
 
 urlpatterns = format_suffix_patterns(urlpatterns)
+
+urlpatterns += [
+    path('api-auth/', include('rest_framework.urls')),
+]

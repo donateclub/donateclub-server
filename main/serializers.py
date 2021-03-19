@@ -14,10 +14,11 @@ class IssueSerializer(serializers.ModelSerializer):
         fields = ('pk','name', 'description')
     
 class ProductSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     deadline = serializers.DateTimeField(format="%Y-%m-%d")
     class Meta:
         model = Product
-        fields = ('pk', 'title', 'description', 'deadline', 'required', 'donated', 'issue', 'ngo', 'image')
+        fields = ('pk', 'title', 'description', 'deadline', 'required', 'donated', 'issue', 'ngo', 'image', 'owner')
 
 class BlogPostSerializer(serializers.ModelSerializer):
     date_published = serializers.DateTimeField(format="%Y-%m-%d")
@@ -45,6 +46,9 @@ class ServiceSerializer(serializers.ModelSerializer):
         fields = ('pk', 'title', 'description', 'start_date', 'end_date', 'paid', 'salary', 'image', 'ngo', 'issue')
 
 class ClubUserSerializer(serializers.ModelSerializer):
+
+    products = serializers.PrimaryKeyRelatedField(many=True, queryset=Product.objects.all())
+
     class Meta:
         model = ClubUser
-        fields = ('pk', 'username', 'image', 'email', 'phone_number', 'country', 'state', 'city')
+        fields = ('pk', 'username', 'image', 'email', 'phone_number', 'country', 'state', 'city', 'products')
