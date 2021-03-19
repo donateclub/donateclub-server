@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 import os
+import datetime
 
 def get_image_path(instance, filename):
     return os.path.join('photos', str(instance.id), filename)
@@ -19,7 +20,7 @@ class Ngo(models.Model):
     image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     title = models.CharField(verbose_name="Title" , max_length=64)
     rating = models.IntegerField()
-    year_established = models.DateField()
+    year_established = models.DateTimeField()
     description = models.TextField(verbose_name="Description")
     country = models.CharField(max_length=64)
     state = models.CharField(max_length=64)
