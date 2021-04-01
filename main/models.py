@@ -108,3 +108,9 @@ class Badge(models.Model):
 class UserBadge(models.Model):
     user = models.ForeignKey(ClubUser, on_delete=models.CASCADE)
     badge = models.ForeignKey(Badge, on_delete=models.CASCADE)
+
+class ContactUs(models.Model):
+    name = models.CharField(max_length=64)
+    email = models.EmailField(max_length=254)
+    subject = models.CharField(max_length=255)
+    message = models.TextField(verbose_name="Message")

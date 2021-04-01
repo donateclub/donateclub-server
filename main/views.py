@@ -7,7 +7,7 @@ from .serializers import *
 
 from rest_framework import status, generics
 from rest_framework import permissions
-from .permissions import IsOwnerOrReadOnly
+from .permissions import *
 
 class NgoList(generics.ListCreateAPIView):
     queryset = Ngo.objects.all()
@@ -37,7 +37,7 @@ class ProductList(generics.ListCreateAPIView):
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, IsNgo]
 
 class BlogsList(generics.ListCreateAPIView):
     queryset = BlogPost.objects.all()
@@ -78,3 +78,7 @@ class ClubUsersList(generics.ListAPIView):
 class ClubUserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ClubUser.objects.all()
     serializer_class = ClubUserSerializer
+
+class ConatctUsList(generics.ListCreateAPIView):
+    queryset = ContactUs.objects.all()
+    serializer_class = ContactUsSerializer

@@ -13,7 +13,8 @@ urlpatterns = [
     path('badges/', BadgesList.as_view(), name='badge_collection'),
     path('services/', ServicesList.as_view, name='service_collection'),
     path('users/', ClubUsersList.as_view(), name='user_collection'),
-    path('users/<int:pk>/', ClubUserDetail.as_view(), name='user_details')
+    path('users/<int:pk>/', ClubUserDetail.as_view(), name='user_details'),
+    path('contactUs/', ConatctUsList.as_view(), name='contact_put'),
 ]
 
 

@@ -52,3 +52,9 @@ class ClubUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClubUser
         fields = ('pk', 'username', 'image', 'email', 'phone_number', 'country', 'state', 'city', 'products')
+
+
+class ContactUsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactUs
+        fields = ('pk', 'name', 'email','subject', 'mesage')

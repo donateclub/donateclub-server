@@ -68,3 +68,7 @@ class ServiceAdmin(admin.ModelAdmin):
 class ClubUserAdmin(admin.ModelAdmin):
     inlines = [BadgeInline, DonationInline]
     list_display = ['username', 'image', 'email', 'phone_number', 'country', 'state', 'city']
+
+@admin.register(ContactUs)
+class ContactUsAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'subject', 'message', ]
