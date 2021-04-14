@@ -7,6 +7,7 @@ urlpatterns = [
     path('products/', ProductList.as_view(), name='product_collection'),
     path('products/<int:pk>/', ProductDetail.as_view()),
     path('ngos/', NgoList.as_view(), name='ngo_collection'),
+    path('ngos/<int:pk>/', NgoDetails.as_view(),),
     path('issues/', IssuesList.as_view(), name='issues_collection'),
     path('posts/', BlogsList.as_view(), name='blog_post_collection'),
     path('doantions/', DonationsList.as_view(), name='donation_collection'),

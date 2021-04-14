@@ -4,3 +4,4 @@ djangorestframework
 django-filter
 django-cors-headers
 djoser
+django-cors-headers
