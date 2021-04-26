@@ -1,12 +1,13 @@
 from rest_framework import serializers
 from .models import *
+from djoser.serializers import UserCreateSerializer as BaseUserRegistrationSerializer
 
 class NgoSerializer(serializers.ModelSerializer):
 
     year_established = serializers.DateTimeField(format="%Y-%m-%d")
     class Meta:
         model = Ngo
-        fields = ('pk', 'title', 'rating', 'year_established', 'description', 'country', 'state', 'city', 'pincode', 'issue', 'phone_number', 'email')
+        fields = ('pk','image', 'title', 'rating', 'year_established', 'description', 'country', 'state', 'city', 'pincode', 'issue', 'phone_number', 'email')
 
 class IssueSerializer(serializers.ModelSerializer):
     class Meta:
