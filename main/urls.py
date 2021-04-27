@@ -17,6 +17,8 @@ urlpatterns = [
     path('users/', ClubUsersList.as_view(), name='user_collection'),
     path('users/<int:pk>/', ClubUserDetail.as_view(), name='user_details'),
     path('contactUs/', ConatctUsList.as_view(), name='contact_put'),
+    path('blog/<int:pk>/', BlogDetails.as_view(), name='blog_details'),
+    path('blogs/', BlogsList.as_view(), name='blog_collection'),
 ]
 
 
